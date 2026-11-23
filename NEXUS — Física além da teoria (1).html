@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>NEXUS — Física além da teoria</title>
+<style>
+:root{color-scheme:dark;--bg:#040813;--bg2:#08112a;--tx:#eaf2ff;--mut:#9fb2d4;--ln:#1b2b52;--ac:#2f6bff;--cy:#35e6ff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:17px/1.65 "Segoe UI",system-ui,-apple-system,Roboto,sans-serif;overflow-x:hidden}
+h1,h2,h3{line-height:1.05;margin:0;font-weight:700;letter-spacing:-.02em}
+a{color:inherit}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--cy);outline-offset:3px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+section{padding:120px 0;position:relative}
+.eyebrow{font:600 12px/1 ui-monospace,Menlo,monospace;letter-spacing:.25em;color:var(--cy);text-transform:uppercase;margin-bottom:20px}
+h2{font-size:clamp(34px,5.4vw,64px);max-width:15ch;margin-bottom:24px}
+.lead{color:var(--mut);max-width:60ch}
+nav{position:fixed;top:0;left:0;right:0;z-index:20;padding:calc(14px + env(safe-area-inset-top,0px)) 24px 14px;display:flex;justify-content:space-between;align-items:center;background:linear-gradient(#040813e6,#04081300);backdrop-filter:blur(6px)}
+.logo{font-weight:800;letter-spacing:.3em;text-decoration:none;display:flex;align-items:center;gap:10px}
+.logo i{width:18px;height:18px;border:2px solid var(--cy);border-radius:50%;position:relative;display:block}
+.logo i:after{content:"";position:absolute;width:6px;height:6px;background:var(--cy);border-radius:50%;top:-4px;left:6px;box-shadow:0 0 10px var(--cy)}
+nav ul{display:flex;gap:28px;list-style:none;margin:0;padding:0}
+nav a.l{text-decoration:none;font-size:14px;color:var(--mut);transition:.25s;padding:6px 0;border-bottom:1px solid transparent}
+nav a.l:hover,nav a.l.on{color:#fff;border-color:var(--cy)}
+#mb{display:none;background:none;border:1px solid var(--ln);border-radius:8px;padding:8px 12px}
+#hero{min-height:100svh;display:flex;align-items:center;padding:110px 0 80px;overflow:hidden}
+#hc{position:absolute;inset:0;width:100%;height:100%}
+#hero .wrap{position:relative}
+#hero h1{font-size:clamp(44px,8.5vw,112px);max-width:11ch}
+#hero h1 em{font-style:normal;background:linear-gradient(90deg,var(--ac),var(--cy));-webkit-background-clip:text;background-clip:text;color:transparent}
+#hero p{max-width:52ch;color:var(--mut);margin:28px 0 38px;font-size:19px}
+.btn{display:inline-block;border:1px solid var(--cy);background:#35e6ff14;padding:15px 30px;border-radius:99px;letter-spacing:.18em;font-size:13px;font-weight:700;text-decoration:none;transition:.3s}
+.btn:hover{background:var(--cy);color:#02101c;box-shadow:0 0 36px #35e6ff66}
+.scroll{position:absolute;bottom:26px;left:50%;width:1px;height:54px;background:linear-gradient(var(--cy),transparent);animation:sc 2s infinite}
+@keyframes sc{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+.areas{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--ln);border:1px solid var(--ln);margin-top:60px}
+.area{background:var(--bg);border:0;text-align:left;padding:34px 22px 28px;min-height:380px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;transition:.4s}
+.area:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 0,hsl(var(--h) 100% 55%/.28),transparent 65%);opacity:.5;transition:.4s}
+.area:hover:before,.area:focus-visible:before{opacity:1}
+.area svg{width:100%;height:110px;position:relative}
+.area b{font:800 22px/1 inherit;letter-spacing:.12em;position:relative;color:hsl(var(--h) 100% 75%)}
+.area span{color:var(--mut);font-size:15px;position:relative}
+.area small{font:11px ui-monospace,monospace;letter-spacing:.2em;color:var(--cy);position:relative}
+dialog{background:var(--bg2);color:var(--tx);border:1px solid var(--ln);border-radius:20px;max-width:760px;width:calc(100% - 32px);max-height:88vh;padding:0;box-shadow:0 0 90px #2f6bff40}
+dialog::backdrop{background:#02040bd9;backdrop-filter:blur(4px)}
+.mb{padding:44px 40px}
+.mb h3{font-size:44px;color:hsl(var(--h) 100% 75%);margin-bottom:6px}
+.mb h4{font:600 12px ui-monospace,monospace;letter-spacing:.22em;color:var(--cy);margin:30px 0 10px;text-transform:uppercase}
+.mb p,.mb li{color:#c7d6f0}
+.mb ul{padding-left:18px;margin:0}
+.fm{display:flex;gap:16px;align-items:baseline;border-top:1px solid var(--ln);padding:10px 0}
+.fm code{font:600 17px ui-monospace,monospace;color:#fff;min-width:150px}
+.fm span{color:var(--mut);font-size:15px}
+.x{position:absolute;top:14px;right:14px;background:none;border:1px solid var(--ln);border-radius:50%;width:40px;height:40px;font-size:20px}
+.x:hover{border-color:var(--cy)}
+#cot{background:linear-gradient(var(--bg),#06102a 30%,#06102a 70%,var(--bg))}
+.q{border-top:1px solid var(--ln)}
+.q:last-child{border-bottom:1px solid var(--ln)}
+.q button{width:100%;background:none;border:0;display:flex;gap:26px;align-items:center;padding:26px 4px;text-align:left;font-size:clamp(19px,2.6vw,28px);font-weight:600;transition:.3s}
+.q button:hover{color:var(--cy);padding-left:14px}
+.q button i{font:normal 13px ui-monospace,monospace;color:var(--cy);min-width:28px}
+.q button:after{content:"+";margin-left:auto;font-size:26px;color:var(--cy);transition:.3s}
+.q button[aria-expanded=true]:after{transform:rotate(45deg)}
+.q div{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s}
+.q.o div{grid-template-rows:1fr}
+.q div p{overflow:hidden;margin:0;color:#c7d6f0;max-width:68ch;padding-left:54px}
+.q.o div p{padding-bottom:28px}
+.labs{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:56px}
+.lab{border:1px solid var(--ln);border-radius:18px;padding:26px;background:linear-gradient(160deg,#0a1633,#050a1a)}
+.lab h3{font-size:24px;margin-bottom:4px}
+.lab.hl{border-color:var(--cy);box-shadow:0 0 40px #35e6ff55}
+.lab .k{font:11px ui-monospace,monospace;letter-spacing:.22em;color:var(--cy)}
+canvas.c{width:100%;aspect-ratio:10/3;display:block;margin:16px 0;background:#030714;border-radius:10px;border:1px solid var(--ln)}
+.ctl{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-bottom:12px}
+.ctl label{font-size:14px;color:var(--mut);display:flex;flex-direction:column;gap:4px;min-width:150px;flex:1}
+.ctl output{color:#fff;font-weight:600}
+input[type=range]{accent-color:var(--cy);width:100%}
+.sb{border:1px solid var(--ln);background:#0d1c42;border-radius:8px;padding:8px 16px;font-size:14px;transition:.2s}
+.sb:hover{border-color:var(--cy)}
+.sb:active{transform:scale(.96)}
+.rd{display:flex;gap:20px;flex-wrap:wrap;font:14px ui-monospace,monospace;color:var(--cy);margin:6px 0}
+.note{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+#qz{border:1px solid var(--ln);border-radius:20px;padding:40px;margin-top:50px;background:#060d22;max-width:820px}
+.pg{height:3px;background:var(--ln);margin-bottom:26px}.pg i{display:block;height:100%;background:linear-gradient(90deg,var(--ac),var(--cy));transition:.4s;width:0}
+.qi{display:flex;justify-content:space-between;font:12px ui-monospace,monospace;letter-spacing:.15em;color:var(--cy);margin-bottom:14px}
+#qz h3{font-size:clamp(22px,3vw,32px);line-height:1.25;margin-bottom:26px}
+.op{display:block;width:100%;text-align:left;border:1px solid var(--ln);background:#0a1530;border-radius:12px;padding:15px 18px;margin-bottom:10px;transition:.25s}
+.op:hover:not(:disabled){border-color:var(--cy);transform:translateX(6px)}
+.op.ok{border-color:#3dffa0;background:#0b3a2a}.op.no{border-color:#ff5d7a;background:#3a0f1c}
+.op:disabled{cursor:default;color:var(--tx)}
+#ex{margin:16px 0;color:#c7d6f0;min-height:1px}
+.big{font-size:80px;font-weight:800;color:var(--cy)}
+.cur{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:56px;border-top:1px solid var(--ln)}
+.cur article{padding:34px 28px 34px 0;border-bottom:1px solid var(--ln)}
+.cur em{font:normal 44px/1 ui-monospace,monospace;color:#2f6bff80;display:block;margin-bottom:16px}
+.cur h3{font-size:22px;margin-bottom:12px;line-height:1.2}
+.cur p{color:var(--mut);font-size:15.5px;margin:0}
+#mp{width:100%;max-width:860px;display:block;margin:40px auto 0;overflow:visible}
+.nd{cursor:pointer}
+.nd circle{fill:#06102a;stroke:var(--cy);stroke-width:1.5;transition:.3s}
+.nd:hover circle,.nd:focus-visible circle,.nd.on circle{fill:var(--ac);filter:drop-shadow(0 0 10px var(--cy))}
+.nd text{fill:#fff;font:600 13px "Segoe UI",sans-serif;text-anchor:middle}
+.ed{stroke:#2f6bff;stroke-width:1.2;stroke-dasharray:4 6;animation:dsh 2s linear infinite;opacity:.8}
+@keyframes dsh{to{stroke-dashoffset:-20}}
+#mi{text-align:center;max-width:560px;margin:20px auto 0;min-height:110px;color:#c7d6f0}
+.gs{display:flex;gap:12px;flex-wrap:wrap;margin:40px 0 28px}
+.gs input{flex:1;min-width:220px;background:#08112a;border:1px solid var(--ln);border-radius:99px;padding:12px 20px;color:#fff;font:inherit}
+.ch{border:1px solid var(--ln);background:none;border-radius:99px;padding:8px 16px;font-size:14px;color:var(--mut)}
+.ch[aria-pressed=true]{background:var(--ac);color:#fff;border-color:var(--ac)}
+#gl{display:grid;grid-template-columns:repeat(2,1fr);gap:0 40px}
+#gl div{border-top:1px solid var(--ln);padding:18px 0}
+#gl b{font-size:19px}#gl small{font:11px ui-monospace,monospace;color:var(--cy);letter-spacing:.15em;margin-left:10px}
+#gl p{margin:4px 0 0;color:var(--mut);font-size:15px}
+footer{border-top:1px solid var(--ln);padding:70px 0 50px;color:var(--mut)}
+footer .wrap{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap}
+footer b{color:#fff;letter-spacing:.2em}footer ul{list-style:none;padding:0;display:flex;gap:20px;flex-wrap:wrap;margin:0}
+footer small{display:block;margin-top:12px;max-width:44ch}
+#up{position:fixed;right:20px;bottom:calc(20px + env(safe-area-inset-bottom,0px));width:46px;height:46px;border-radius:50%;border:1px solid var(--cy);background:#040813cc;opacity:0;pointer-events:none;transition:.3s;z-index:15}
+#up.s{opacity:1;pointer-events:auto}
+.rv{opacity:0;transform:translateY(26px);transition:opacity .9s,transform .9s}.rv.in{opacity:1;transform:none}
+@media(max-width:960px){.areas{grid-template-columns:1fr 1fr}.area{min-height:260px}.labs{grid-template-columns:1fr}.cur{grid-template-columns:1fr 1fr}#gl{grid-template-columns:1fr}}
+@media(max-width:720px){#mb{display:block}nav ul{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;background:#040813f5;padding:10px 24px 20px}nav ul.o{display:flex}nav ul a{display:block;padding:14px 0!important}.areas,.cur{grid-template-columns:1fr}section{padding:84px 0}.mb{padding:36px 22px}.fm{flex-direction:column;gap:2px}#qz{padding:24px}.q div p{padding-left:0}.q button{gap:14px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}.rv{opacity:1;transform:none}}
+</style></head><body>
+<nav><a class="logo" href="#inicio" aria-label="NEXUS, início"><i></i>NEXUS</a>
+<button id="mb" aria-expanded="false" aria-controls="nv">Menu</button>
+<ul id="nv"><li><a class="l" href="#inicio">Início</a></li><li><a class="l" href="#explorar">Explorar</a></li><li><a class="l" href="#cotidiano">Cotidiano</a></li><li><a class="l" href="#lab">Laboratório</a></li><li><a class="l" href="#desafio">Desafio</a></li><li><a class="l" href="#curiosidades">Curiosidades</a></li></ul></nav>
+
+<header id="inicio"><section id="hero" style="padding-top:110px"><canvas id="hc" aria-hidden="true"></canvas>
+<div class="wrap"><div class="eyebrow">NEXUS — Física além da teoria</div>
+<h1>O universo <em>não funciona</em> por acaso.</h1>
+<p>Do movimento dos planetas à energia que alimenta sua tela, a Física está presente em tudo. Explore os fenômenos, experimente as leis e descubra o que existe por trás do mundo.</p>
+<a class="btn" href="#explorar">INICIAR EXPLORAÇÃO</a></div><div class="scroll" aria-hidden="true"></div></section></header>
+
+<main>
+<section id="explorar"><div class="wrap"><div class="eyebrow rv">01 — Explorar</div><h2 class="rv">Explore o que move o universo</h2>
+<p class="lead rv">Cinco grandes perguntas. Escolha uma e mergulhe: conceitos, fórmulas, exemplos e curiosidades.</p>
+<div class="areas rv" id="ar"></div></div></section>
+
+<section id="cotidiano"><div class="wrap"><div class="eyebrow rv">02 — Cotidiano</div><h2 class="rv">Você vive dentro da Física</h2>
+<p class="lead rv">Dez situações comuns, dez fenômenos por trás delas. Toque para revelar.</p>
+<div id="cq" style="margin-top:50px"></div></div></section>
+
+<section id="lab"><div class="wrap"><div class="eyebrow rv">03 — Laboratório virtual</div><h2 class="rv">Experimente a Física</h2>
+<p class="lead rv">Quatro experimentos com modelos simplificados. Mude os valores e veja as leis em ação.</p>
+<div class="labs">
+<div class="lab rv" id="lab-mov"><div class="k">EXPERIMENTO 01</div><h3>Movimento uniforme</h3><canvas class="c" id="c1" width="600" height="180" aria-label="Objeto em pista horizontal"></canvas>
+<div class="ctl"><label>Velocidade <output id="o1">5 m/s</output><input type="range" id="s1" min="1" max="20" value="5"></label><button class="sb" id="p1">Iniciar</button><button class="sb" id="r1">Reiniciar</button></div>
+<div class="rd"><span id="d1"></span></div><p class="note">Modelo: MRU, s = v·t, velocidade constante, sem atrito. Pista de 100 m; o objeto para ao chegar ao fim. Alterar a velocidade durante o movimento muda a taxa de deslocamento dali em diante.</p></div>
+
+<div class="lab rv" id="lab-circ"><div class="k">EXPERIMENTO 02</div><h3>Circuito elétrico</h3><canvas class="c" id="c2" width="600" height="180" aria-label="Circuito com fonte e resistor"></canvas>
+<div class="ctl"><label>Tensão V <output id="o2">12 V</output><input type="range" id="s2" min="1" max="24" value="12"></label><label>Resistência R <output id="o3">20 Ω</output><input type="range" id="s3" min="5" max="100" value="20"></label><button class="sb" id="p2" aria-pressed="true">Desligar</button></div>
+<div class="rd"><span id="d2"></span></div><p class="note">Lei de Ohm: I = V/R (I corrente em ampères, V tensão em volts, R resistência em ohms). Potência dissipada P = V·I, que aquece o resistor. Modelo ideal: fonte e fios sem resistência.</p></div>
+
+<div class="lab rv" id="lab-onda"><div class="k">EXPERIMENTO 03</div><h3>Ondas</h3><canvas class="c" id="c3" width="600" height="180" aria-label="Onda senoidal"></canvas>
+<div class="ctl"><label>Frequência <output id="o4">1.0 Hz</output><input type="range" id="s4" min="5" max="50" value="10"></label><label>Amplitude <output id="o5">5 cm</output><input type="range" id="s5" min="1" max="10" value="5"></label></div>
+<div class="rd"><span id="d3"></span></div><p class="note">Velocidade de propagação fixa em 2 m/s (v = λ·f): aumentar f encurta λ. Amplitude maior significa mais energia transportada, não mais rapidez. Trecho mostrado: 4 m.</p></div>
+
+<div class="lab rv" id="lab-queda"><div class="k">EXPERIMENTO 04</div><h3>Gravidade e queda</h3><canvas class="c" id="c4" width="600" height="180" aria-label="Objeto em queda livre"></canvas>
+<div class="ctl"><button class="sb" id="p4">Soltar</button><button class="sb" id="r4">Reiniciar</button></div>
+<div class="rd"><span id="d4"></span></div><p class="note">Modelo: queda livre a partir do repouso, de 50 m, g = 9,8 m/s², sem resistência do ar. y = h − ½·g·t², v = g·t. A massa não influencia. Marcas a cada 0,5 s.</p></div>
+</div></div></section>
+
+<section id="desafio"><div class="wrap"><div class="eyebrow rv">04 — Desafio NEXUS</div><h2 class="rv">Teste o que você descobriu</h2>
+<div id="qz" class="rv" aria-live="polite"></div></div></section>
+
+<section id="curiosidades"><div class="wrap"><div class="eyebrow rv">05 — Curiosidades</div><h2 class="rv">O universo é mais estranho do que parece</h2>
+<div class="cur" id="cu"></div></div></section>
+
+<section id="mapa"><div class="wrap"><div class="eyebrow rv">06 — Mapa de exploração</div><h2 class="rv">Tudo está conectado</h2>
+<p class="lead rv">Toque em um nó para ver como os fenômenos se ligam.</p>
+<svg id="mp" viewBox="0 0 800 420" role="group" aria-label="Mapa de conceitos de Física"></svg><div id="mi" aria-live="polite"></div></div></section>
+
+<section id="glossario"><div class="wrap"><div class="eyebrow rv">07 — Glossário</div><h2 class="rv">Vocabulário da Física</h2>
+<div class="gs"><input id="gq" type="search" placeholder="Buscar termo ou definição" aria-label="Buscar no glossário"><span id="gf" style="display:contents"></span></div><div id="gl"></div></div></section>
+</main>
+
+<footer><div class="wrap"><div><b>NEXUS — Física além da teoria</b><small>Compreender o universo começa com observar aquilo que está ao nosso redor.</small><small>Projeto educacional desenvolvido para explorar os conceitos da Física.</small></div>
+<ul><li><a href="#inicio">Início</a></li><li><a href="#explorar">Explorar</a></li><li><a href="#cotidiano">Cotidiano</a></li><li><a href="#lab">Laboratório</a></li><li><a href="#desafio">Desafio</a></li><li><a href="#curiosidades">Curiosidades</a></li></ul></div></footer>
+<button id="up" aria-label="Voltar ao topo">↑</button>
+<dialog id="dg" aria-labelledby="dt"><button class="x" aria-label="Fechar">×</button><div class="mb" id="db"></div></dialog>
+
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const A=[
+{id:"mov",n:"MOVIMENTO",h:215,q:"O que faz algo se mover, acelerar ou parar?",c:["Cinemática: descreve o movimento (posição, velocidade, aceleração) sem perguntar a causa.","Velocidade e aceleração: quão rápido a posição e a velocidade mudam.","Leis de Newton: inércia, F = m·a e ação e reação.","Gravidade: atração entre massas; perto da Terra, g ≈ 9,8 m/s².","Energia cinética: energia associada ao movimento."],
+f:[["v = Δs / Δt","v velocidade (m/s), Δs deslocamento (m), Δt intervalo de tempo (s)"],["a = Δv / Δt","a aceleração (m/s²), Δv variação da velocidade"],["F = m · a","F força resultante (N), m massa (kg), a aceleração"],["P = m · g","P peso (N), g aceleração da gravidade"]],
+ex:"Quando um carro freia, você continua em movimento por inércia: o cinto de segurança aplica a força que desacelera seu corpo.",cu:"Em 1971, na Lua, o astronauta David Scott soltou um martelo e uma pena ao mesmo tempo: sem ar, caíram juntos.",lab:"lab-mov"},
+{id:"en",n:"ENERGIA",h:45,q:"Como a energia se transforma e se manifesta?",c:["Energia cinética e potencial: de movimento e de posição.","Conservação: em um sistema isolado, a energia total se mantém.","Trabalho: energia transferida por uma força ao longo de um deslocamento.","Potência: rapidez com que a energia é transferida.","Consumo elétrico: energia = potência × tempo, medida em kWh."],
+f:[["Ec = ½ · m · v²","Ec energia cinética (J), m massa, v velocidade"],["Ep = m · g · h","Ep energia potencial gravitacional (J), h altura (m)"],["W = F · d · cos θ","W trabalho (J), d deslocamento, θ ângulo entre força e deslocamento"],["P = W / Δt","P potência (W)"],["E = P · Δt","E energia consumida"]],
+ex:"Um chuveiro de 5500 W ligado por 15 min consome 5,5 kW × 0,25 h = 1,375 kWh.",cu:"1 kWh equivale a 3,6 milhões de joules.",lab:"lab-mov"},
+{id:"lz",n:"LUZ",h:185,q:"Como enxergamos e como a luz se comporta?",c:["Óptica: estudo da luz e de sua interação com a matéria.","Reflexão: a luz volta ao encontrar uma superfície; o ângulo de incidência é igual ao de reflexão.","Refração: a luz muda de direção ao passar de um meio para outro.","Espelhos e lentes: formam imagens ao refletir ou refratar a luz.","Espectro eletromagnético: da onda de rádio aos raios gama; a luz visível é uma faixa estreita.","Cores: dependem do comprimento de onda e de como os materiais absorvem e refletem a luz."],
+f:[["c = λ · f","c velocidade da luz no vácuo (≈ 3·10⁸ m/s), λ comprimento de onda, f frequência"],["n₁·sen θ₁ = n₂·sen θ₂","Lei de Snell: n índice de refração, θ ângulos com a normal"],["1/f = 1/p + 1/p′","Equação dos pontos conjugados: f foco, p distância do objeto, p′ da imagem"]],
+ex:"Um canudo parece “quebrado” dentro de um copo d’água por causa da refração na superfície.",cu:"A luz do Sol leva cerca de 8 minutos e 20 segundos para chegar à Terra.",lab:"lab-mov"},
+{id:"on",n:"ONDAS",h:260,q:"Como fenômenos e informações se propagam pelo espaço?",c:["Ondas mecânicas precisam de meio material; eletromagnéticas não.","Frequência: oscilações por segundo (Hz).","Amplitude: valor máximo do afastamento; relaciona-se à energia da onda.","Comprimento de onda: distância entre duas cristas.","Som: onda mecânica longitudinal; no ar a 20 °C, cerca de 343 m/s.","Ressonância: quando a frequência de uma força coincide com a natural de um sistema, a oscilação cresce."],
+f:[["v = λ · f","v velocidade de propagação, λ comprimento de onda, f frequência"],["T = 1 / f","T período (s)"]],
+ex:"Ao sintonizar uma estação de rádio, você ajusta o receptor para ressoar na frequência daquela emissora.",cu:"Uma taça de cristal pode se romper quando exposta, em condições controladas, a um som na sua frequência natural.",lab:"lab-mov"},
+{id:"ca",n:"CALOR",h:12,q:"Como a energia térmica transforma o mundo?",c:["Temperatura: medida da agitação média das partículas.","Calor: energia térmica transferida por diferença de temperatura.","Equilíbrio térmico: corpos em contato atingem a mesma temperatura.","Dilatação: materiais aumentam de tamanho ao serem aquecidos.","Condução, convecção e irradiação: três formas de propagação do calor.","Mudanças de estado: fusão, vaporização, solidificação e condensação."],
+f:[["Q = m · c · ΔT","Q calor (J), m massa, c calor específico, ΔT variação de temperatura"],["ΔL = L₀ · α · ΔT","ΔL dilatação linear, L₀ comprimento inicial, α coeficiente de dilatação"],["Q = m · L","Calor latente em uma mudança de estado, sem variar a temperatura"]],
+ex:"O cabo metálico de uma panela esquenta por condução; o ar quente do fogão sobe por convecção.",cu:"A água líquida tem densidade máxima por volta de 4 °C, por isso lagos congelam de cima para baixo.",lab:"lab-mov"}];
+A[0].lab="lab-mov";A[1].lab="lab-circ";A[2].lab=null;A[3].lab="lab-onda";A[4].lab=null;
+const ico=h=>`<svg viewBox="0 0 120 110" aria-hidden="true" fill="none" stroke="hsl(${h} 100% 70%)" stroke-width="1.2"><circle cx="60" cy="55" r="14"/><ellipse cx="60" cy="55" rx="50" ry="18" transform="rotate(${h%60-25} 60 55)"/><ellipse cx="60" cy="55" rx="34" ry="46" transform="rotate(${h%40} 60 55)" opacity=".5"/><circle cx="108" cy="48" r="3" fill="hsl(${h} 100% 75%)"/></svg>`;
+$("#ar").innerHTML=A.map((a,i)=>`<button class="area" style="--h:${a.h}" data-i="${i}">${ico(a.h)}<div><small>0${i+1}</small><br><b>${a.n}</b><br><span>${a.q}</span></div></button>`).join("");
+const dg=$("#dg");let lastF=null;
+function open(i){lastF=document.activeElement;const a=A[i];$("#db").style.setProperty("--h",a.h);
+$("#db").innerHTML=`<div class="eyebrow">${a.n}</div><h3 id="dt">${a.q}</h3><h4>Conceitos principais</h4><ul>${a.c.map(x=>`<li>${x}</li>`).join("")}</ul><h4>Fórmulas</h4>${a.f.map(f=>`<div class="fm"><code>${f[0]}</code><span>${f[1]}</span></div>`).join("")}<h4>No cotidiano</h4><p>${a.ex}</p><h4>Curiosidade</h4><p>${a.cu}</p>${a.lab?`<p style="margin-top:28px"><a class="btn" href="#${a.lab}" data-go>EXPERIMENTAR</a></p>`:""}`;dg.showModal()}
+$("#ar").onclick=e=>{const b=e.target.closest(".area");if(b)open(+b.dataset.i)};
+let goT=null;
+dg.onclick=e=>{const go=e.target.closest("[data-go]");if(go){e.preventDefault();goT=go.getAttribute("href").slice(1);dg.close();return}if(e.target===dg||e.target.closest(".x"))dg.close()};
+dg.onclose=()=>{if(goT){const t=document.getElementById(goT);goT=null;if(t){requestAnimationFrame(()=>{t.scrollIntoView({behavior:RM?"auto":"smooth",block:"center"});t.classList.add("hl");t.setAttribute("tabindex","-1");setTimeout(()=>t.focus({preventScroll:true}),700);setTimeout(()=>t.classList.remove("hl"),2800)})}return}lastF&&lastF.focus&&lastF.focus()};
+
+const C=[["Por que o corpo vai para frente quando o carro freia?","Pela inércia (1ª lei de Newton): todo corpo tende a manter seu estado de movimento. O carro desacelera, mas você continua com a velocidade anterior até que uma força, como a do cinto, o freie."],
+["Como o celular transmite informações?","Dados são convertidos em sinais elétricos e usados para modular ondas eletromagnéticas (radiofrequência). Antenas emitem e captam essas ondas, que viajam à velocidade da luz até a torre mais próxima."],
+["Como os óculos corrigem a visão?","Por refração. Na miopia, lentes divergentes afastam os raios antes de entrarem no olho; na hipermetropia, lentes convergentes ajudam a focar a imagem exatamente sobre a retina."],
+["Por que o céu é azul?","A luz solar é espalhada pelas moléculas do ar, e o espalhamento é muito mais intenso para comprimentos de onda curtos (proporcional a 1/λ⁴, espalhamento de Rayleigh). O azul é espalhado em todas as direções; no pôr do sol, o caminho é longo e sobra o vermelho."],
+["Como uma bicicleta mantém seu movimento?","Pela inércia: sem forças opostas, ela manteria a velocidade. O atrito com o ar e os rolamentos tiram energia, e as pedaladas a repõem. A rotação das rodas também ajuda a manter a estabilidade."],
+["Como funciona um micro-ondas?","Gera ondas eletromagnéticas de cerca de 2,45 GHz. As moléculas de água dos alimentos são polares e tendem a se alinhar ao campo elétrico oscilante; essa agitação se converte em energia térmica."],
+["Por que ouvimos o trovão depois do relâmpago?","A luz chega quase instantaneamente (≈ 300.000 km/s), enquanto o som viaja a cerca de 343 m/s. A cada 3 segundos de atraso, o raio caiu a aproximadamente 1 km."],
+["Como um avião consegue voar?","A asa, com formato e inclinação (ângulo de ataque) adequados, desvia o ar para baixo e cria diferença de pressão entre as faces. Pela 3ª lei de Newton e pela diferença de pressão, surge a força de sustentação, que equilibra o peso."],
+["Por que o gelo flutua na água?","Ao congelar, as moléculas de água formam uma estrutura hexagonal mais espaçada. O gelo tem densidade de ≈ 917 kg/m³, menor que a da água líquida (≈ 1000 kg/m³), e por isso flutua."],
+["Como funciona a energia elétrica em casa?","A usina gera eletricidade em corrente alternada. Linhas de transmissão usam alta tensão para reduzir perdas, e transformadores abaixam a tensão até as tomadas (127 V ou 220 V, 60 Hz no Brasil). Seus aparelhos consomem energia = potência × tempo."]];
+$("#cq").innerHTML=C.map((c,i)=>`<div class="q rv"><button aria-expanded="false" aria-controls="q${i}"><i>${String(i+1).padStart(2,"0")}</i>${c[0]}</button><div id="q${i}" role="region"><p>${c[1]}</p></div></div>`).join("");
+$("#cq").onclick=e=>{const b=e.target.closest("button");if(!b)return;const q=b.parentNode,o=!q.classList.contains("o");q.classList.toggle("o",o);b.setAttribute("aria-expanded",o)};
+
+/* Laboratório */
+const cx=n=>$("#c"+n).getContext("2d"),f1=(n,d=1)=>n.toFixed(d).replace(".",",");
+const M={t:0,x:0,run:0},E={on:1,ph:0},W={t:0},F={t:0,run:0};
+$("#s1").oninput=e=>$("#o1").textContent=e.target.value+" m/s";
+$("#p1").onclick=()=>{if(M.x>=100)rst1();M.run=!M.run;$("#p1").textContent=M.run?"Pausar":"Continuar"};
+const rst1=()=>{M.t=M.x=0;M.run=0;$("#p1").textContent="Iniciar"};$("#r1").onclick=rst1;
+$("#s2").oninput=$("#s3").oninput=()=>{$("#o2").textContent=$("#s2").value+" V";$("#o3").textContent=$("#s3").value+" Ω"};
+$("#p2").onclick=()=>{E.on=!E.on;$("#p2").textContent=E.on?"Desligar":"Ligar";$("#p2").setAttribute("aria-pressed",E.on)};
+$("#s4").oninput=e=>$("#o4").textContent=f1(e.target.value/10)+" Hz";$("#s5").oninput=e=>$("#o5").textContent=e.target.value+" cm";
+$("#p4").onclick=()=>{if(F.t>=Math.sqrt(100/9.8))F.t=0;F.run=!F.run;$("#p4").textContent=F.run?"Pausar":"Continuar"};
+$("#r4").onclick=()=>{F.t=0;F.run=0;$("#p4").textContent="Soltar"};
+function g(c,w,h){c.clearRect(0,0,w,h);c.strokeStyle="#12214a";c.lineWidth=1;for(let i=0;i<w;i+=40){c.beginPath();c.moveTo(i,0);c.lineTo(i,h);c.stroke()}}
+const CY="#35e6ff";
+function d1(dt){const c=cx(1),v=+$("#s1").value;if(M.run){M.t+=dt;M.x=Math.min(100,M.x+v*dt);if(M.x>=100){M.run=0;$("#p1").textContent="Reiniciar"}}
+g(c,600,180);c.strokeStyle="#2f6bff";c.beginPath();c.moveTo(30,130);c.lineTo(570,130);c.stroke();c.fillStyle="#9fb2d4";c.font="12px sans-serif";for(let m=0;m<=100;m+=20){const x=30+m*5.4;c.fillRect(x,130,1,8);c.fillText(m+" m",x-10,154)}
+const x=30+M.x*5.4;c.shadowColor=CY;c.shadowBlur=18;c.fillStyle=CY;c.fillRect(x-14,102,28,28);c.shadowBlur=0;
+$("#d1").textContent=`t = ${f1(M.t,2)} s   |   s = ${f1(M.x,1)} m   |   v = ${v} m/s`}
+function d2(dt){const c=cx(2),V=+$("#s2").value,R=+$("#s3").value,I=E.on?V/R:0,P=V*I;E.ph=(E.ph+I*0.035*dt)%1;
+g(c,600,180);const L=[[80,40],[520,40],[520,140],[80,140]];c.strokeStyle="#4b6fd8";c.lineWidth=2;c.beginPath();L.forEach((p,i)=>i?c.lineTo(...p):c.moveTo(...p));c.closePath();c.stroke();
+c.fillStyle="#040813";c.fillRect(255,28,90,24);c.fillRect(60,70,40,32);
+const gl=Math.min(1,P/80);c.shadowColor="#ff8a35";c.shadowBlur=30*gl;c.strokeStyle=`rgb(${90+165*gl},${120+20*gl},${255-200*gl})`;c.lineWidth=3;c.strokeRect(255,28,90,24);c.shadowBlur=0;
+c.strokeStyle="#fff";c.lineWidth=2;c.beginPath();c.moveTo(70,76);c.lineTo(90,76);c.moveTo(75,66);c.lineTo(85,66);c.moveTo(66,92);c.lineTo(94,92);c.stroke();
+c.fillStyle="#9fb2d4";c.font="12px sans-serif";c.fillText("Fonte "+V+" V",100,92);c.fillText("R = "+R+" Ω",262,22);
+if(I>0){c.fillStyle=CY;const per=1760;for(let k=0;k<28;k++){let d=((k/28+E.ph)%1)*per,x,y;if(d<440){x=80+d;y=40}else if(d<540){x=520;y=40+d-440}else if(d<980){x=520-(d-540);y=140}else if(d<1100){x=80;y=140-(d-980)}else{d=d-1100;x=80+d*0.67;y=40}
+if(d>=0&&!(y===40&&x>250&&x<350)){c.beginPath();c.arc(x,y,3,0,7);c.fill()}}}
+$("#d2").textContent=`I = V/R = ${f1(I,2)} A   |   P = ${f1(P,1)} W   |   ${E.on?"ligado":"desligado"}`}
+function d3(dt){const c=cx(3),f=$("#s4").value/10,A_=+$("#s5").value;W.t+=dt;const l=2/f;
+g(c,600,180);c.strokeStyle="#2f6bff40";c.beginPath();c.moveTo(0,90);c.lineTo(600,90);c.stroke();c.strokeStyle=CY;c.lineWidth=2.5;c.shadowColor=CY;c.shadowBlur=10;c.beginPath();
+for(let px=0;px<=600;px+=3){const x=px/150,y=90-A_*7.5*Math.sin(2*Math.PI*(x/l-f*W.t));px?c.lineTo(px,y):c.moveTo(px,y)}c.stroke();c.shadowBlur=0;
+$("#d3").textContent=`f = ${f1(f)} Hz   |   T = ${f1(1/f,2)} s   |   λ = ${f1(l,2)} m   |   A = ${A_} cm`}
+function d4(dt){const c=cx(4),H=50,gg=9.8,T=Math.sqrt(2*H/gg);if(F.run){F.t=Math.min(T,F.t+dt);if(F.t>=T){F.run=0;$("#p4").textContent="Soltar"}}
+const t=F.t,y=H-.5*gg*t*t,py=h=>20+(50-h)/50*130;g(c,600,180);c.fillStyle="#9fb2d4";c.font="11px sans-serif";
+for(let s=0;s<=T;s+=.5){const yy=H-.5*gg*s*s;if(s<=t){c.fillStyle="#2f6bff";c.beginPath();c.arc(300,py(yy),2.5,0,7);c.fill();c.fillStyle="#9fb2d4";c.fillText(f1(s)+" s",312,py(yy)+4)}}
+c.strokeStyle="#4b6fd8";c.beginPath();c.moveTo(200,150);c.lineTo(400,150);c.stroke();c.shadowColor=CY;c.shadowBlur=16;c.fillStyle=CY;c.beginPath();c.arc(300,py(Math.max(0,y))-0,10,0,7);c.fill();c.shadowBlur=0;
+$("#d4").textContent=`t = ${f1(t,2)} s   |   altura = ${f1(Math.max(0,y),1)} m   |   v = ${f1(gg*t,1)} m/s   |   queda total ${f1(T,2)} s`}
+/* Hero */
+const hc=$("#hc"),hx=hc.getContext("2d");let HW,HH,P=[];
+function hs(){const r=devicePixelRatio>1?1.5:1;HW=hc.width=hc.clientWidth;HH=hc.height=hc.clientHeight;P=Array.from({length:Math.min(110,HW/10)},()=>({a:Math.random()*6.28,r:60+Math.random()*Math.max(HW,HH)*.6,s:(.02+Math.random()*.08)*(Math.random()<.5?-1:1),z:Math.random()*1.6+.4}))}
+function dh(t){hx.clearRect(0,0,HW,HH);const cx_=HW*.72,cy=HH*.5;hx.strokeStyle="#2f6bff22";for(let r=120;r<Math.max(HW,HH);r+=130){hx.beginPath();hx.ellipse(cx_,cy,r,r*.42,-.3,0,7);hx.stroke()}
+const gr=hx.createRadialGradient(cx_,cy,0,cx_,cy,90);gr.addColorStop(0,"#35e6ffcc");gr.addColorStop(1,"#35e6ff00");hx.fillStyle=gr;hx.beginPath();hx.arc(cx_,cy,90,0,7);hx.fill();
+P.forEach(p=>{const a=p.a+t*p.s*.0003*60/ (p.r/200+1),x=cx_+Math.cos(a)*p.r,y=cy+Math.sin(a)*p.r*.42;hx.fillStyle=`rgba(${150+p.z*40},${210},255,${.25+p.z*.25})`;hx.beginPath();hx.arc(x,y,p.z,0,7);hx.fill()})}
+/* Loop */
+let last=0,RM=matchMedia("(prefers-reduced-motion:reduce)").matches;
+function loop(t){const dt=Math.min(.05,(t-last)/1000||0);last=t;
+if(scrollY<innerHeight*1.2&&!RM)dh(t);
+[["#lab-mov",d1],["#c2",d2],["#c3",d3],["#c4",d4]].forEach(([s,fn])=>{const r=$(s==="#lab-mov"?"#c1":s).getBoundingClientRect();if(r.bottom>0&&r.top<innerHeight)fn(RM&&fn!==d1&&fn!==d4?0:dt)});
+requestAnimationFrame(loop)}
+hs();addEventListener("resize",hs);if(RM)dh(0);requestAnimationFrame(loop);
+
+/* Quiz */
+const Q=[["Qual é a unidade de força no Sistema Internacional?",["Joule","Newton","Watt","Pascal"],1,"A força é medida em newtons (N): 1 N = 1 kg·m/s²."],
+["Sem resistência do ar, uma bola de ferro e uma de madeira soltas da mesma altura...",["Caem juntas","A de ferro cai antes","A de madeira cai antes","Nenhuma cai"],0,"Na queda livre a aceleração é g para qualquer massa."],
+["Uma resistência de 4 Ω ligada a 12 V é percorrida por qual corrente?",["0,33 A","3 A","8 A","48 A"],1,"I = V/R = 12/4 = 3 A."],
+["O que acontece com o som no vácuo?",["Viaja mais rápido","Viaja mais devagar","Não se propaga","Vira luz"],2,"O som é onda mecânica e precisa de um meio material."],
+["A mudança de direção da luz ao passar de um meio para outro chama-se:",["Reflexão","Difração","Polarização","Refração"],3,"É a refração, descrita pela lei de Snell."],
+["Segundo a conservação da energia, em um sistema isolado a energia total:",["Aumenta sempre","Diminui sempre","Se transforma e se mantém","Desaparece em calor"],2,"Ela muda de forma, mas o total permanece constante."],
+["Uma onda de 50 Hz tem período de:",["0,02 s","0,2 s","2 s","50 s"],0,"T = 1/f = 1/50 = 0,02 s."],
+["O calor é:",["Uma substância","A temperatura de um corpo","Energia térmica em trânsito por diferença de temperatura","Frio que sai dos corpos"],2,"Calor é energia transferida por diferença de temperatura."],
+["Qual radiação tem maior frequência?",["Ondas de rádio","Luz visível","Micro-ondas","Raios gama"],3,"Os raios gama estão na extremidade de maior frequência do espectro."],
+["Um aparelho de 100 W funciona por 10 s. Qual energia consome?",["10 J","100 J","1000 J","10000 J"],2,"E = P·t = 100 × 10 = 1000 J."]];
+let qs,qi,sc,ans;
+function qstart(){qs=[...Q].sort(()=>Math.random()-.5);qi=sc=0;qshow()}
+function qshow(){ans=0;const q=qs[qi],z=$("#qz");
+z.innerHTML=`<div class="pg"><i style="width:${qi/qs.length*100}%"></i></div><div class="qi"><span>PERGUNTA ${qi+1}/${qs.length}</span><span>PONTOS ${sc}</span></div><h3>${q[0]}</h3>${q[1].map((o,i)=>`<button class="op" data-i="${i}">${o}</button>`).join("")}<div id="ex"></div><button class="btn" id="nx" hidden style="background:none;cursor:pointer">${qi==qs.length-1?"VER RESULTADO":"PRÓXIMA"}</button>`}
+$("#qz").onclick=e=>{const b=e.target.closest("button");if(!b)return;
+if(b.id==="nx"){qi++;qi<qs.length?qshow():qend();return}
+if(b.id==="rp"){qstart();return}
+if(!b.classList.contains("op")||ans)return;ans=1;const q=qs[qi],k=+b.dataset.i;
+$$(".op").forEach(o=>{o.disabled=true;if(+o.dataset.i===q[2])o.classList.add("ok")});
+if(k===q[2])sc++;else b.classList.add("no");
+$("#ex").innerHTML=`<b>${k===q[2]?"Correto.":"Incorreto."}</b> ${q[3]}`;$("#nx").hidden=false;$("#nx").focus()};
+function qend(){const m=sc>=9?"Mente de cientista.":sc>=6?"Bom domínio. Há mais a explorar.":"Volte ao laboratório e tente de novo.";
+$("#qz").innerHTML=`<div class="pg"><i style="width:100%"></i></div><div class="qi"><span>RESULTADO</span></div><div class="big">${sc}/${qs.length}</div><h3>${m}</h3><button class="btn" id="rp" style="background:none;cursor:pointer">JOGAR NOVAMENTE</button>`}
+qstart();
+
+/* Curiosidades */
+const U=[["O tempo passa de forma diferente","Pela relatividade, relógios em movimento rápido andam mais devagar e relógios em campos gravitacionais mais fortes também. Os satélites de GPS corrigem esses efeitos: o saldo é de cerca de 38 microssegundos por dia."],
+["O espaço não é completamente vazio","No espaço interestelar há poucos átomos por centímetro cúbico, e no intergaláctico muito menos. Há também radiação, como a radiação cósmica de fundo, e campos que a Física moderna descreve em toda parte."],
+["Luz: onda e partícula","Em alguns experimentos a luz mostra interferência (comportamento de onda); em outros, troca energia em pacotes chamados fótons. A Física quântica descreve os dois aspectos como uma só natureza."],
+["Supercondutores","Abaixo de uma temperatura crítica, certos materiais conduzem corrente com resistência elétrica nula. Também expulsam campos magnéticos, o que permite levitar um ímã sobre eles."],
+["O som não viaja no vácuo","Som é uma vibração que passa de partícula em partícula. Sem matéria no caminho, não há como propagá-lo. Por isso, no espaço, sem ar, não se ouve uma explosão."],
+["A gravidade e o tempo","Quanto mais intenso o campo gravitacional, mais lento o relógio. Um relógio atômico no alto de uma montanha marca o tempo ligeiramente mais rápido que outro ao nível do mar."],
+["A cor é uma interação","Um objeto vermelho absorve a maior parte das outras cores e reflete o vermelho. A cor percebida depende da luz que o ilumina, do material e do nosso sistema visual."]];
+$("#cu").innerHTML=U.map((u,i)=>`<article class="rv"><em>0${i+1}</em><h3>${u[0]}</h3><p>${u[1]}</p></article>`).join("");
+
+/* Mapa */
+const N={mov:["Movimento",90,210,"Descreve como a posição muda com o tempo.",0],for:["Força",250,100,"Causa a variação do movimento: F = m·a.",0],ene:["Energia",410,210,"Capacidade de realizar trabalho; se transforma e se conserva.",1],ele:["Eletricidade",580,100,"Movimento de cargas elétricas; consumo medido em kWh.",1],ond:["Ondas",250,320,"Propagam energia e informação sem transportar matéria.",3],som:["Som",410,380,"Ondas mecânicas que precisam de meio material.",3],luz:["Luz",580,300,"Onda eletromagnética visível, que se propaga no vácuo.",2],opt:["Óptica",730,210,"Estudo de reflexão, refração, espelhos e lentes.",2],cal:["Calor",410,40,"Energia térmica em trânsito entre corpos.",4],ter:["Termodinâmica",650,30,"Leis que relacionam calor, trabalho e energia.",4]};
+const Ed=[["mov","for"],["for","ene"],["ene","ele"],["ond","som"],["ond","luz"],["luz","opt"],["cal","ter"],["ene","cal"],["ene","ond"]];
+$("#mp").innerHTML=Ed.map(([a,b])=>`<line class="ed" x1="${N[a][1]}" y1="${N[a][2]}" x2="${N[b][1]}" y2="${N[b][2]}"/>`).join("")+Object.entries(N).map(([k,n])=>`<g class="nd" tabindex="0" role="button" data-k="${k}" aria-label="${n[0]}"><circle cx="${n[1]}" cy="${n[2]}" r="30"/><text x="${n[1]}" y="${n[2]+4}">${n[0].length>9?n[0].slice(0,6)+".":n[0]}</text></g>`).join("");
+function sel(k){const n=N[k];$$(".nd").forEach(g=>g.classList.toggle("on",g.dataset.k===k));$("#mi").innerHTML=`<h3 style="margin-bottom:8px">${n[0]}</h3><p>${n[3]}</p><button class="btn" style="background:none;cursor:pointer;padding:10px 22px" data-a="${n[4]}">ABRIR CONTEÚDO</button>`}
+$("#mp").onclick=e=>{const g=e.target.closest(".nd");g&&sel(g.dataset.k)};
+$("#mp").onkeydown=e=>{if(e.key==="Enter"||e.key===" "){const g=e.target.closest(".nd");if(g){e.preventDefault();sel(g.dataset.k)}}};
+$("#mi").onclick=e=>{const b=e.target.closest("[data-a]");b&&open(+b.dataset.a)};
+sel("for");
+
+/* Glossário */
+const G=[["Aceleração","Taxa de variação da velocidade no tempo (m/s²).","Movimento"],["Inércia","Tendência de um corpo manter seu estado de repouso ou de movimento.","Movimento"],["Massa","Medida da quantidade de matéria e da inércia de um corpo (kg).","Movimento"],["Força","Interação capaz de alterar o movimento ou deformar um corpo (N).","Movimento"],["Velocidade","Rapidez com que a posição varia no tempo (m/s).","Movimento"],["Energia","Capacidade de realizar trabalho; medida em joules (J).","Energia"],["Potência","Energia transferida por unidade de tempo (W).","Energia"],["Trabalho","Energia transferida por uma força ao longo de um deslocamento.","Energia"],["Tensão","Diferença de potencial elétrico, que impulsiona a corrente (V).","Energia"],["Resistência elétrica","Oposição à passagem de corrente elétrica (Ω).","Energia"],["Refração","Desvio da luz ao mudar de meio.","Luz"],["Espectro eletromagnético","Conjunto de todas as ondas eletromagnéticas, ordenadas por frequência.","Luz"],["Frequência","Número de oscilações por segundo (Hz).","Ondas"],["Amplitude","Máximo afastamento da posição de equilíbrio em uma onda.","Ondas"],["Comprimento de onda","Distância entre duas cristas consecutivas (m).","Ondas"],["Ressonância","Aumento da oscilação quando a excitação coincide com a frequência natural.","Ondas"],["Pressão","Força aplicada por unidade de área (Pa).","Calor"],["Temperatura","Medida da agitação média das partículas de um corpo.","Calor"],["Calor","Energia térmica transferida por diferença de temperatura.","Calor"],["Dilatação","Variação das dimensões de um corpo causada por mudança de temperatura.","Calor"]];
+const cats=["Todos","Movimento","Energia","Luz","Ondas","Calor"];let cat="Todos";
+$("#gf").innerHTML=cats.map(c=>`<button class="ch" aria-pressed="${c==="Todos"}">${c}</button>`).join("");
+function gr(){const q=$("#gq").value.toLowerCase();const r=G.filter(g=>(cat==="Todos"||g[2]===cat)&&(g[0]+g[1]).toLowerCase().includes(q));
+$("#gl").innerHTML=r.length?r.map(g=>`<div><b>${g[0]}</b><small>${g[2].toUpperCase()}</small><p>${g[1]}</p></div>`).join(""):"<p>Nenhum termo encontrado.</p>"}
+$("#gf").onclick=e=>{const b=e.target.closest(".ch");if(!b)return;cat=b.textContent;$$(".ch").forEach(x=>x.setAttribute("aria-pressed",x===b));gr()};$("#gq").oninput=gr;gr();
+
+/* Nav & UI */
+$("#mb").onclick=()=>{const o=$("#nv").classList.toggle("o");$("#mb").setAttribute("aria-expanded",o)};
+$("#nv").onclick=e=>{if(e.target.closest("a"))$("#nv").classList.remove("o")};
+$("#up").onclick=()=>scrollTo({top:0});
+const secs=$$("section[id],header[id]"),links=$$("a.l");
+addEventListener("scroll",()=>{$("#up").classList.toggle("s",scrollY>600);let cur="inicio";secs.forEach(s=>{if(s.getBoundingClientRect().top<innerHeight*.4)cur=s.id});links.forEach(l=>l.classList.toggle("on",l.getAttribute("href")==="#"+cur))},{passive:true});
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{threshold:.12});$$(".rv").forEach(x=>io.observe(x));
+</script></body></html>
